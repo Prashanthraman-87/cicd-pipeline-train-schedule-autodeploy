@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfigId']) {
-                    sh 'kubectl apply -f train-schedule-kube-canary.yml'
+                    sh 'envsubst <train-schedule-kube-canary.yml | kubectl apply -f -'
                 }
             }
         }
