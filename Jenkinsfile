@@ -25,7 +25,10 @@ pipeline {
                 }
             }
         }
-        stage('Apply Kubernetes files') {
+        stage('CanaryDeploy') {
+            environment { 
+                CANARY_REPLICAS = 1
+                }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfigId']) {
                     sh 'kubectl apply -f train-schedule-kube-canary.yml'
