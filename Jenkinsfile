@@ -26,8 +26,10 @@ pipeline {
             }
         }
         stage('Apply Kubernetes files') {
-            withKubeConfig([credentialsId: 'kubeconfig']) {
-                sh 'kubectl apply -f train-schedule-kube-canary.yml'
+            steps {
+                withKubeConfig([credentialsId: 'kubeconfig']) {
+                    sh 'kubectl apply -f train-schedule-kube-canary.yml'
+                }
             }
         }
         stage('CanaryDeploy') {
