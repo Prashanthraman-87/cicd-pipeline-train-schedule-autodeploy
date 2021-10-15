@@ -40,7 +40,6 @@ pipeline {
                 CANARY_REPLICAS = 0
             }
             steps {
-                input 'Deploy to Production?'
                 milestone(1)
                 withKubeConfig([credentialsId: 'kubeconfigId']) {
                     sh 'envsubst <train-schedule-kube-canary.yml | kubectl apply -f -'
